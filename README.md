@@ -1,0 +1,1 @@
+# oferta-magazin-gsm
