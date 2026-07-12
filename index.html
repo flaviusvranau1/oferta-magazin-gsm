@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ofertă — Magazin online GSM · Standard / Premium / Luxury</title>
+<style>
+  :root{
+    --bg:#0b0b0c; --panel:#141416; --panel2:#1a1a1d; --line:#2a2a2f;
+    --txt:#f4f4f6; --muted:#9a9aa2; --lime:#c6f000; --lime-dim:#9fc400;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:48px 24px 80px}
+  header.top{border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:40px}
+  .brand{font-size:22px;font-weight:800;letter-spacing:.5px}
+  .brand span{color:var(--lime)}
+  .brand small{color:var(--muted);font-weight:500;font-size:13px;letter-spacing:2px;margin-left:6px}
+  .ghlink{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-size:13px;font-weight:600;color:var(--txt);text-decoration:none;background:var(--panel);border:1px solid var(--line);padding:8px 14px;border-radius:10px;transition:.15s}
+  .ghlink:hover{border-color:var(--lime);color:var(--lime)}
+  h1{font-size:34px;font-weight:800;line-height:1.15;margin:22px 0 10px}
+  .sub{color:var(--muted);font-size:16px;max-width:700px}
+  .kicker{color:var(--lime);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase}
+  .chips{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
+  .chip{font-size:12px;color:var(--muted);background:var(--panel);border:1px solid var(--line);padding:5px 11px;border-radius:20px}
+
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:40px 0 12px}
+  .tier{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px 22px;display:flex;flex-direction:column;position:relative}
+  .tier.hi{border-color:var(--lime-dim)}
+  .tier .dot{width:12px;height:12px;border-radius:50%;display:inline-block;margin-right:8px}
+  .d-green{background:#7CD67C}.d-blue{background:#7fb2ff}.d-purple{background:#c58bff}
+  .tier h3{font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;display:flex;align-items:center}
+  .tier .role{font-size:12px;color:var(--muted);margin:6px 0 16px}
+  .price{font-size:34px;font-weight:800}
+  .lei{color:var(--muted);font-size:13px;margin-top:2px}
+  .tier ul{list-style:none;margin:18px 0 0;font-size:13.5px}
+  .tier ul li{padding:6px 0 6px 22px;position:relative;color:#d8d8dc;border-top:1px solid #202024}
+  .tier ul li:first-child{border-top:none}
+  .tier ul li::before{content:"✓";position:absolute;left:0;color:var(--lime);font-weight:800}
+
+  h2{font-size:22px;font-weight:800;margin:56px 0 6px;padding-top:8px}
+  .h2sub{color:var(--muted);font-size:14px;margin-bottom:8px}
+  .hint{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--lime);background:rgba(198,240,0,.07);border:1px solid var(--lime-dim);border-radius:20px;padding:5px 12px;margin:6px 0 16px}
+
+  table.cmp{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:8px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  table.cmp th,table.cmp td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line)}
+  table.cmp thead th{background:var(--panel2);font-size:12px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)}
+  table.cmp td.c{text-align:center;width:110px}
+  table.cmp tbody tr{transition:background .12s}
+  table.cmp tbody tr:hover{background:#1c1c10}
+  td.feat-name{cursor:help;position:relative}
+  td.feat-name::after{content:"?";display:inline-block;margin-left:8px;width:15px;height:15px;line-height:15px;text-align:center;font-size:10px;font-weight:800;color:var(--lime);border:1px solid var(--lime-dim);border-radius:50%;opacity:.55;vertical-align:middle}
+  .yes{color:var(--lime);font-weight:800}
+  .no{color:#4a4a50}
+  .mini{color:var(--muted);font-size:12px}
+
+  #tip{position:fixed;z-index:9999;max-width:280px;background:#101012;border:1px solid var(--lime-dim);border-radius:12px;padding:13px 15px;font-size:13px;line-height:1.5;color:#e6e6ea;box-shadow:0 14px 40px rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .12s}
+  #tip b{color:var(--lime);display:block;font-size:13.5px;margin-bottom:4px}
+  #tip .bn{color:var(--lime);font-weight:700}
+
+  .grp{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--lime);margin:30px 0 12px}
+  .legend{font-size:12.5px;color:var(--muted);margin:2px 0 10px}
+  .legend i{font-style:normal;font-weight:800;font-size:10px;padding:2px 6px;border-radius:5px;margin:0 2px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:10px}
+  .card .name{font-weight:700;font-size:15px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .card .what{color:#d4d4d8;font-size:14px;margin-top:4px}
+  .card .help{color:var(--muted);font-size:13.5px;margin-top:6px}
+  .card .help b{color:var(--lime);font-weight:700}
+  .tags{white-space:nowrap;flex-shrink:0}
+  .tags i{display:inline-block;font-style:normal;font-size:10px;font-weight:800;width:19px;height:19px;line-height:19px;text-align:center;border-radius:5px;margin-left:4px}
+  .t-s{background:#7CD67C;color:#04210a}.t-p{background:#7fb2ff;color:#05203f}.t-l{background:#c58bff;color:#1e0a34}
+
+  .callout{background:linear-gradient(180deg,#161a0a,#131313);border:1px solid var(--lime-dim);border-radius:16px;padding:22px 22px;margin:18px 0}
+  .callout h4{color:var(--lime);font-size:16px;margin-bottom:8px;display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+  .callout p{font-size:14px;color:#dcdce0;margin-bottom:8px}
+  .callout .flow{font-size:13px;color:var(--muted);background:#0d0d0e;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:8px}
+  .callout .flow b{color:#fff}
+
+  .note{background:var(--panel);border:1px dashed var(--line);border-radius:12px;padding:16px 18px;font-size:13.5px;color:var(--muted);margin-top:14px}
+  .note b{color:var(--txt)}
+
+  footer{margin-top:56px;border-top:1px solid var(--line);padding-top:22px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  footer b{color:var(--txt)}
+  footer a{color:var(--lime);text-decoration:none}
+  @media(max-width:820px){.tiers{grid-template-columns:1fr}h1{font-size:27px}table.cmp{font-size:12.5px}table.cmp td.c{width:64px}}
+</style>
+</head>
+<body>
+<div id="tip"></div>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">GSM<span>SHOP</span> <small>MAGAZIN ONLINE</small></div>
+    <a class="ghlink" href="https://github.com/flaviusvranau1/gsm-shop-bistrita" target="_blank" rel="noopener">▶ Vezi demo &amp; cod sursă pe GitHub</a>
+    <div class="kicker" style="margin-top:22px">Ofertă dezvoltare magazin online GSM</div>
+    <h1>Trei pachete, de la magazin funcțional<br>la platformă complet automatizată.</h1>
+    <p class="sub">Magazin online pentru telefoane și accesorii, construit pe tehnologie modernă (Next.js) — rapid, sigur și conform legislației din România. Mai jos ai cele trei variante, comparație completă și explicația fiecărei funcționalități: ce înseamnă și cum te ajută pe tine, ca magazin.</p>
+    <div class="chips">
+      <span class="chip">Catalog până la 500 de produse</span>
+      <span class="chip">Limba română</span>
+      <span class="chip">Dezvoltare custom</span>
+      <span class="chip">Cod sursă 100% al tău</span>
+    </div>
+  </header>
+
+  <div class="tiers">
+    <div class="tier">
+      <h3><span class="dot d-green"></span>Standard</h3>
+      <div class="role">Magazin funcțional, gata de vânzare</div>
+      <div class="price">2.100 €</div>
+      <div class="lei">≈ 10.500 lei</div>
+      <ul>
+        <li>Catalog + variante (memorie, culoare)</li>
+        <li>Filtre de bază + căutare</li>
+        <li>Coș + checkout ca vizitator</li>
+        <li>Plată card online + ramburs</li>
+        <li>Facturare PF/firmă + e-Factura</li>
+        <li>Google Analytics + SEO de bază</li>
+        <li>Admin comenzi + produse</li>
+        <li>Conform legal + cod sursă al tău</li>
+      </ul>
+    </div>
+
+    <div class="tier">
+      <h3><span class="dot d-blue"></span>Premium</h3>
+      <div class="role">Magazin serios, ușor de administrat</div>
+      <div class="price">3.800 €</div>
+      <div class="lei">≈ 19.000 lei</div>
+      <ul>
+        <li>Tot din Standard, plus:</li>
+        <li>Filtre avansate (RAM, procesor, 5G)</li>
+        <li>Cont client + istoric comenzi</li>
+        <li>AWB automat — 1 curier</li>
+        <li>Wishlist + vouchere + recenzii</li>
+        <li>Google Shopping + SEO extins</li>
+        <li>Dashboard KPI + alerte stoc redus</li>
+        <li>Procesare automată (comenzi card)</li>
+      </ul>
+    </div>
+
+    <div class="tier hi">
+      <h3><span class="dot d-purple"></span>Luxury</h3>
+      <div class="role">Platformă premium, complet automatizată</div>
+      <div class="price">5.100 €</div>
+      <div class="lei">≈ 25.500 lei</div>
+      <ul>
+        <li>Tot din Premium, plus:</li>
+        <li>Design custom 100% de la zero</li>
+        <li>AWB pe 3 curieri + Easybox</li>
+        <li>Chatbot pentru clienți</li>
+        <li>Automatizări n8n (coș abandonat etc.)</li>
+        <li>Integrare eMAG / compari.ro</li>
+        <li>Optimizare performanță + mentenanță</li>
+        <li>Procesare comenzi 100% automată</li>
+      </ul>
+    </div>
+  </div>
+  <p class="mini" style="text-align:center;margin-top:6px">Prețuri pentru varianta finalizată, cu toate integrările funcționale, catalog până la ~500 de produse. Curs orientativ ≈ 5 lei/€. TVA nu e inclus.</p>
+
+  <h2>Comparație completă</h2>
+  <div class="h2sub">Ce intră exact în fiecare pachet.</div>
+  <div class="hint">💡 Treci cu mouse-ul peste o funcționalitate ca să vezi ce înseamnă</div>
+  <table class="cmp">
+    <thead>
+      <tr><th>Funcționalitate</th><th class="c">Standard</th><th class="c">Premium</th><th class="c">Luxury</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="feat-name" data-tip="<b>Catalog + variante</b>Fiecare telefon cu opțiunile lui (memorie, culoare) pe aceeași pagină, cu preț și stoc per variantă. <span class='bn'>→ Comenzi corecte și mai puține retururi.</span>">Catalog + variante (memorie, culoare)</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Filtre de bază</b>Filtrare după preț, marcă și stare, plus căutare. <span class='bn'>→ Clienții găsesc rapid ce caută și cumpără mai mult.</span>">Filtre de bază (preț, marcă, stare)</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Filtre avansate</b>Filtrare pe specificații tehnice (RAM, procesor, 5G). <span class='bn'>→ Conversie mai bună la publicul care știe ce vrea.</span>">Filtre avansate (RAM, procesor, 5G)</td><td class="c no">—</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Checkout ca vizitator</b>Clientul cumpără fără cont obligatoriu. <span class='bn'>→ Mai puține coșuri abandonate.</span>">Checkout ca vizitator</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Cont client + istoric</b>Clientul își vede comenzile și adresele salvate. <span class='bn'>→ Clienți fideli care revin ușor.</span>">Cont client + istoric comenzi</td><td class="c no">—</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Stoc real-time + anti-supravânzare</b>Stocul scade automat; la ultimul produs câștigă cine plătește primul. <span class='bn'>→ Nu vinzi niciodată ce nu ai.</span>">Stoc real-time + anti-supravânzare</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Limită de cantitate</b>Împiedică cumpărarea a zeci de bucăți dintr-un model. <span class='bn'>→ Protejezi stocul de revânzători și fraude.</span>">Limită cantitate</td><td class="c mini">per comandă</td><td class="c mini">per client</td><td class="c mini">per client</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Plată card online (Netopia)</b>Clientul plătește instant cu cardul, banii ajung la tine. <span class='bn'>→ Încasezi sigur, fără coletele refuzate.</span>">Plată card online (Netopia)</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Plată ramburs (opțional)</b>Plata la livrare, în numerar sau card. Se poate activa sau scoate. <span class='bn'>→ Aduce comenzi de la cei fără încredere să plătească înainte.</span>">Plată ramburs (opțional)</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Facturare + SmartBill + e-Factura</b>Factura se face automat pentru PF/firmă și pleacă la ANAF. <span class='bn'>→ Zero muncă manuală și conform legal.</span>">Facturare PF/firmă + SmartBill + e-Factura</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Email confirmare comandă</b>Clientul primește automat confirmarea și factura pe email. <span class='bn'>→ Încredere și mai puține telefoane.</span>">Email confirmare comandă</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Livrare curier (AWB)</b>Eticheta de expediere: manuală la Standard, automată dintr-un clic la Premium/Luxury. <span class='bn'>→ Expediere rapidă, fără erori de adresă.</span>">Livrare curier (AWB)</td><td class="c mini">manual</td><td class="c mini">auto · 1 curier</td><td class="c mini">auto · 3 curieri</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Easybox (locker)</b>Clientul ridică coletul dintr-un automat, 24/7. <span class='bn'>→ Opțiune foarte căutată, mai multe comenzi.</span>">Easybox (locker)</td><td class="c no">—</td><td class="c no">—</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Wishlist + vouchere</b>Salvare produse pentru mai târziu + coduri de reducere. <span class='bn'>→ Clienții revin și vinzi mai mult în campanii.</span>">Wishlist + vouchere/reduceri</td><td class="c no">—</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Recenzii + cross-sell</b>Recenzii lângă produs și sugestii de accesorii în coș. <span class='bn'>→ Încredere plus coș mediu mai mare.</span>">Recenzii + cross-sell accesorii</td><td class="c no">—</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Google Analytics</b>Vezi câți intră pe site, de unde vin și ce cumpără. Gratuit. <span class='bn'>→ Știi ce merge și unde dai bani pe reclamă.</span>">Google Analytics</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Google Shopping / Merchant</b>Produsele apar direct în Google cu poză, preț și nume. <span class='bn'>→ Cumpărători noi direct din căutări.</span>">Google Shopping / Merchant</td><td class="c no">—</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>SEO</b>De bază: titluri, sitemap, viteză. Extins: schema JSON-LD, rich snippets (preț și steluțe în Google), pagini optimizate. <span class='bn'>→ Trafic gratuit din căutări.</span>">SEO</td><td class="c mini">de bază</td><td class="c mini">extins</td><td class="c mini">extins</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Admin: comenzi + produse</b>Panou simplu unde adaugi produse și procesezi comenzile cu statusuri. <span class='bn'>→ Administrezi singur, fără programator.</span>">Admin: comenzi + produse</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Dashboard KPI + alerte stoc</b>Vânzări, top produse și avertizare automată când un produs e pe terminate. <span class='bn'>→ Decizii rapide, nu rămâi fără stoc.</span>">Dashboard KPI + alerte stoc redus</td><td class="c no">—</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Procesare automată comenzi</b>Comenzile se procesează singure: parțial la Premium (card), complet cu n8n la Luxury (AWB, factură, email, stoc). <span class='bn'>→ Munca de birou dispare aproape complet.</span>">Procesare automată comenzi</td><td class="c no">—</td><td class="c mini">parțial (card)</td><td class="c mini">complet (n8n)</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Chatbot pentru clienți</b>Asistent 24/7 care răspunde la întrebări (stoc, livrare, specificații). <span class='bn'>→ Vinde și noaptea, mai puține întrebări repetate.</span>">Chatbot pentru clienți</td><td class="c no">—</td><td class="c no">—</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Automatizări n8n</b>Email la coș abandonat, cerere de recenzie după livrare, sincronizare stoc. <span class='bn'>→ Recuperezi vânzări pierdute pe pilot automat.</span>">Automatizări n8n (coș abandonat etc.)</td><td class="c no">—</td><td class="c no">—</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Integrare eMAG / compari.ro</b>Produsele tale ajung și pe eMAG Marketplace și pe comparatoare. <span class='bn'>→ Expunere uriașă, vânzări în plus.</span>">Integrare eMAG / compari.ro</td><td class="c no">—</td><td class="c no">—</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Design</b>Temă personalizată la Standard/Premium; design unic, de la zero, la Luxury. <span class='bn'>→ Brand memorabil și mai multă încredere.</span>">Design</td><td class="c mini">temă person.</td><td class="c mini">temă person.</td><td class="c mini">custom 100%</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Optimizare performanță + mentenanță</b>Site rapid (Core Web Vitals) și întreținere continuă. <span class='bn'>→ Ranking mai bun și clienți care nu pleacă.</span>">Optimizare performanță + mentenanță</td><td class="c no">—</td><td class="c no">—</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Conform legal (Omnibus, ANPC, SOL)</b>Preț 30 zile, linkuri ANPC-SAL și SOL, retur 14 zile, garanție afișată. <span class='bn'>→ Eviți amenzile ANPC.</span>">Conform legal (Omnibus, ANPC, SOL)</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+      <tr><td class="feat-name" data-tip="<b>Cod sursă + hosting + domeniu .ro</b>Codul e 100% al tău, pus online pe hosting cu domeniu .ro. <span class='bn'>→ Deții tot, nu depinzi de nimeni.</span>">Cod sursă + hosting + domeniu .ro</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Ce înseamnă fiecare funcționalitate (și cum te ajută)</h2>
+  <div class="h2sub">Explicat simplu, fără termeni tehnici. „Cum te ajută" = câștigul concret pentru magazinul tău.</div>
+  <div class="legend">Etichete pachet: <i class="t-s">S</i> Standard &nbsp; <i class="t-p">P</i> Premium &nbsp; <i class="t-l">L</i> Luxury</div>
+
+  <div class="grp">Catalog & produse</div>
+  <div class="card"><div class="name"><span>Catalog + variante (memorie, culoare)</span><span class="tags"><i class="t-s">S</i><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Fiecare telefon are opțiunile lui pe aceeași pagină: 128/256 GB, culoare, stare (nou/resigilat), fiecare cu preț și stoc propriu.</div><div class="help"><b>Cum te ajută:</b> clientul alege exact ce vrea, fără telefoane și confuzii — comenzi corecte și mai puține retururi.</div></div>
+  <div class="card"><div class="name"><span>Filtre de bază + căutare</span><span class="tags"><i class="t-s">S</i><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Vizitatorul poate filtra după preț, marcă, stare și poate căuta produse.</div><div class="help"><b>Cum te ajută:</b> oamenii găsesc rapid ce caută → cumpără mai mult, pleacă mai puțini.</div></div>
+  <div class="card"><div class="name"><span>Filtre avansate (RAM, procesor, 5G)</span><span class="tags"><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Filtrare fină pe specificații tehnice, pentru cumpărătorii care știu exact ce vor.</div><div class="help"><b>Cum te ajută:</b> conversie mai bună la publicul tehnic, care altfel ar pleca la un magazin mai detaliat.</div></div>
+  <div class="card"><div class="name"><span>Stoc real-time + anti-supravânzare</span><span class="tags"><i class="t-s">S</i><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Stocul scade automat la fiecare comandă. Când doi clienți vor ultimul produs, îl primește cine plătește primul; celălalt vede „stoc epuizat".</div><div class="help"><b>Cum te ajută:</b> nu vinzi niciodată ce nu ai → eviți comenzi imposibil de onorat și clienți nervoși.</div></div>
+  <div class="card"><div class="name"><span>Limită de cantitate</span><span class="tags"><i class="t-s">S</i><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Împiedică pe cineva să cumpere, de exemplu, 30 de bucăți dintr-un model.</div><div class="help"><b>Cum te ajută:</b> te protejezi de revânzători și de comenzi frauduloase care îți blochează stocul.</div></div>
+
+  <div class="grp">Coș, checkout & plăți</div>
+  <div class="card"><div class="name"><span>Checkout ca vizitator</span><span class="tags"><i class="t-s">S</i><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Clientul cumpără rapid, fără să-și facă obligatoriu cont.</div><div class="help"><b>Cum te ajută:</b> mai puține coșuri abandonate — orice pas în plus pierde cumpărători.</div></div>
+  <div class="card"><div class="name"><span>Cont client + istoric comenzi</span><span class="tags"><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Cine vrea își face cont: își vede comenzile, adresele salvate, revine mai ușor.</div><div class="help"><b>Cum te ajută:</b> clienți fideli care comandă din nou fără să reintroducă totul.</div></div>
+  <div class="card"><div class="name"><span>Plată card online (Netopia)</span><span class="tags"><i class="t-s">S</i><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Clientul plătește instant cu cardul, iar banii intră direct la tine.</div><div class="help"><b>Cum te ajută:</b> încasezi sigur, pe loc — fără coletele refuzate la ușă de la ramburs.</div></div>
+  <div class="card"><div class="name"><span>Plată ramburs (opțional)</span><span class="tags"><i class="t-s">S</i><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Plata la livrare, în numerar sau card, la curier. Poate fi activată sau dezactivată.</div><div class="help"><b>Cum te ajută:</b> în România aduce multe comenzi de la cei care nu au încredere să platească înainte. (Se poate scoate dacă preferi doar plata în avans.)</div></div>
+  <div class="card"><div class="name"><span>Facturare PF/firmă + SmartBill + e-Factura</span><span class="tags"><i class="t-s">S</i><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">La comandă se face automat factura, corect, pentru persoană fizică sau firmă (cu CUI), și pleacă spre ANAF prin e-Factura.</div><div class="help"><b>Cum te ajută:</b> zero muncă manuală de facturi și ești în regulă cu legea (e-Factura e obligatorie).</div></div>
+  <div class="card"><div class="name"><span>Email confirmare comandă</span><span class="tags"><i class="t-s">S</i><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Clientul primește automat confirmarea comenzii și factura pe email.</div><div class="help"><b>Cum te ajută:</b> încredere instant și mai puține telefoane de tip „mi-a intrat comanda?".</div></div>
+
+  <div class="grp">Livrare</div>
+  <div class="card"><div class="name"><span>Livrare curier — AWB manual vs. automat</span><span class="tags"><i class="t-s">S</i><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">AWB = eticheta de expediere a coletului. La <b>Standard</b> o generezi manual pe site-ul curierului; la <b>Premium/Luxury</b> se face automat, cu un clic din admin (datele clientului se completează singure).</div><div class="help"><b>Cum te ajută:</b> expediezi în secunde, fără greșeli de adresă și fără să retastezi fiecare comandă.</div></div>
+  <div class="card"><div class="name"><span>Easybox (locker)</span><span class="tags"><i class="t-l">L</i></span></div><div class="what">Clientul își ridică coletul dintr-un automat, oricând, 24/7.</div><div class="help"><b>Cum te ajută:</b> opțiune foarte căutată — mulți cumpără doar dacă pot ridica de la locker.</div></div>
+
+  <div class="grp">Marketing & fidelizare</div>
+  <div class="card"><div class="name"><span>Wishlist + vouchere/reduceri</span><span class="tags"><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Clientul salvează produse pentru mai târziu; tu poți crea coduri de reducere pentru campanii.</div><div class="help"><b>Cum te ajută:</b> îi aduci înapoi să cumpere și vinzi mai mult în promoții.</div></div>
+  <div class="card"><div class="name"><span>Recenzii + cross-sell accesorii</span><span class="tags"><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Recenzii de la clienți lângă produs; sugestii de accesorii („ia și husa") în coș.</div><div class="help"><b>Cum te ajută:</b> recenziile cresc încrederea, cross-sell-ul crește valoarea fiecărei comenzi.</div></div>
+  <div class="card"><div class="name"><span>Google Analytics</span><span class="tags"><i class="t-s">S</i><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Vezi câți oameni intră pe site, de unde vin și ce cumpără. Gratuit.</div><div class="help"><b>Cum te ajută:</b> știi ce funcționează și unde merită să dai bani pe reclamă.</div></div>
+  <div class="card"><div class="name"><span>Google Shopping / Merchant</span><span class="tags"><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Produsele tale apar direct în Google cu poză, preț și nume, în tab-ul Shopping și în reclame.</div><div class="help"><b>Cum te ajută:</b> cumpărători noi direct din Google, exact când caută acel telefon.</div></div>
+  <div class="card"><div class="name"><span>SEO de bază <span class="mini">(toate pachetele)</span></span><span class="tags"><i class="t-s">S</i><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Titluri, descrieri, adrese curate, sitemap și viteză — ca Google să te găsească și să te afișeze corect.</div><div class="help"><b>Cum te ajută:</b> trafic gratuit din căutări, fără să plătești reclame.</div></div>
+  <div class="card"><div class="name"><span>SEO extins</span><span class="tags"><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Date structurate (schema JSON-LD): îi „traduci" lui Google fiecare produs cu preț, stoc și steluțe, plus pagini de categorie optimizate pe cuvinte-cheie locale și meta dinamic per pagină.</div><div class="help"><b>Cum te ajută:</b> Google afișează în căutare direct prețul și steluțele (rich snippets) — mult mai multe click-uri, deci trafic și vânzări gratuite în plus.</div></div>
+
+  <div class="grp">Administrare</div>
+  <div class="card"><div class="name"><span>Admin: comenzi + produse</span><span class="tags"><i class="t-s">S</i><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Un panou simplu unde adaugi produse, modifici prețuri și procesezi comenzile cu statusuri (nouă / confirmată / expediată).</div><div class="help"><b>Cum te ajută:</b> îți administrezi singur magazinul, fără să chemi un programator de fiecare dată.</div></div>
+  <div class="card"><div class="name"><span>Dashboard KPI + alerte stoc redus</span><span class="tags"><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Vezi dintr-o privire vânzările, top produse, coșul mediu, banii de încasat din ramburs — și ești avertizat automat când un produs e pe terminate.</div><div class="help"><b>Cum te ajută:</b> decizii rapide și nu rămâi niciodată fără stoc la cele care se vând.</div></div>
+
+  <div class="grp">Automatizări</div>
+  <div class="callout">
+    <h4><span>Procesare automată a comenzilor — ce înseamnă „complet, cu n8n"</span><span class="tags"><i class="t-p">P</i><i class="t-l">L</i></span></h4>
+    <p>n8n este un motor de automatizări (open-source) care leagă între ele aplicațiile tale și rulează pași automat, fără să atingă nimeni comanda. La <b>Premium</b> automatizarea e parțială (doar comenzile plătite cu cardul se procesează singure). La <b>Luxury</b>, n8n orchestrează tot lanțul:</p>
+    <div class="flow">Comandă plătită → <b>confirmare automată</b> → <b>generare AWB</b> la curier → <b>factură în SmartBill + e-Factura</b> → <b>email cu tracking</b> către client → <b>scădere stoc</b> → <b>notificare</b> la tine pe telefon.</div>
+    <p style="margin-top:12px">Tot n8n trimite automat și: email celui care a <b>abandonat coșul</b>, <b>cerere de recenzie</b> după livrare, și <b>sincronizarea stocului</b>.</p>
+    <div class="help" style="color:var(--muted);font-size:13.5px"><b style="color:var(--lime)">Cum te ajută:</b> munca de birou dispare aproape complet — te ocupi doar de împachetat și expediat. Recuperezi și vânzări pierdute (coș abandonat) pe pilot automat.</div>
+  </div>
+  <div class="card"><div class="name"><span>Chatbot pentru clienți</span><span class="tags"><i class="t-l">L</i></span></div><div class="what">Un asistent care răspunde 24/7 la întrebări: stoc, timp de livrare, specificații, „care telefon e mai bun pentru...".</div><div class="help"><b>Cum te ajută:</b> vinde și noaptea, când tu dormi, și scade numărul de întrebări repetate.</div></div>
+  <div class="card"><div class="name"><span>Integrare eMAG / compari.ro</span><span class="tags"><i class="t-l">L</i></span></div><div class="what">Produsele tale ajung și pe eMAG Marketplace și pe comparatoarele de prețuri.</div><div class="help"><b>Cum te ajută:</b> expunere uriașă în fața unui public pe care singur nu l-ai atinge — vânzări în plus.</div></div>
+
+  <div class="grp">Design, tehnic & legal</div>
+  <div class="card"><div class="name"><span>Design — temă personalizată vs. custom 100%</span><span class="tags"><i class="t-s">S</i><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">La Standard/Premium pornim de la o temă adaptată brandului tău; la Luxury se face un design unic, de la zero.</div><div class="help"><b>Cum te ajută:</b> un aspect memorabil și profesional crește încrederea și te diferențiază de concurență.</div></div>
+  <div class="card"><div class="name"><span>Optimizare performanță + mentenanță</span><span class="tags"><i class="t-l">L</i></span></div><div class="what">Site rapid (scoruri bune Core Web Vitals) și întreținere continuă din partea mea.</div><div class="help"><b>Cum te ajută:</b> Google te ranchează mai sus, iar clienții nu pleacă de la un site lent.</div></div>
+  <div class="card"><div class="name"><span>Conform legal (Omnibus, ANPC, SOL)</span><span class="tags"><i class="t-s">S</i><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Prețul cel mai mic din ultimele 30 de zile lângă reduceri, linkuri ANPC-SAL și SOL, retur 14 zile, garanție afișată.</div><div class="help"><b>Cum te ajută:</b> eviți amenzile ANPC (pot fi mari) și arăți serios în fața clienților.</div></div>
+  <div class="card"><div class="name"><span>Cod sursă + hosting + domeniu .ro</span><span class="tags"><i class="t-s">S</i><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Codul magazinului e 100% al tău, iar eu îl pun online pe hosting cu domeniu .ro.</div><div class="help"><b>Cum te ajută:</b> deții totul, nu depinzi de nimeni și poți muta magazinul oricând.</div></div>
+
+  <div class="note">
+    <b>Costuri recurente (anuale, independent de dezvoltare):</b> hosting ~60–300 €/an · domeniu .ro ~12–15 €/an · abonament SmartBill ~120–300 €/an · Netopia — fără abonament, comision ~1,5–2,5% pe tranzacție · mentenanță (dacă nu e inclusă) ~200–800 €/an. Curieri: fără taxă lunară de API, plătești per colet.
+  </div>
+
+  <footer>
+    <div>Ofertă pregătită de <b>Flavius Vranău</b> · dezvoltare web &amp; automatizări<br>Demo &amp; cod: <a href="https://github.com/flaviusvranau1/gsm-shop-bistrita" target="_blank" rel="noopener">github.com/flaviusvranau1/gsm-shop-bistrita</a><br>Prețurile sunt orientative, pentru cataloage de până la ~500 de produse.</div>
+    <div style="text-align:right"><b>Contact</b><br>flavius.vranau@fargrup.ro</div>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var tip = document.getElementById('tip');
+  var els = document.querySelectorAll('[data-tip]');
+  els.forEach(function(el){
+    el.addEventListener('mouseenter', function(){ tip.innerHTML = el.getAttribute('data-tip'); tip.style.opacity = '1'; });
+    el.addEventListener('mousemove', function(e){
+      var pad = 16; var r = tip.getBoundingClientRect();
+      var x = e.clientX + pad, y = e.clientY + pad;
+      if (x + r.width > window.innerWidth - 8) x = e.clientX - r.width - pad;
+      if (y + r.height > window.innerHeight - 8) y = e.clientY - r.height - pad;
+      if (x < 8) x = 8; if (y < 8) y = 8;
+      tip.style.left = x + 'px'; tip.style.top = y + 'px';
+    });
+    el.addEventListener('mouseleave', function(){ tip.style.opacity = '0'; });
+  });
+})();
+</script>
+</body>
+</html>
