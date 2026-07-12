@@ -37,6 +37,8 @@
   .tier ul li{padding:6px 0 6px 22px;position:relative;color:#d8d8dc;border-top:1px solid #202024}
   .tier ul li:first-child{border-top:none}
   .tier ul li::before{content:"✓";position:absolute;left:0;color:var(--lime);font-weight:800}
+  .tier ul li[data-tip]{cursor:help}
+  .tier ul li[data-tip]:hover{color:#fff}
 
   h2{font-size:22px;font-weight:800;margin:56px 0 6px;padding-top:8px}
   .h2sub{color:var(--muted);font-size:14px;margin-bottom:8px}
@@ -101,6 +103,7 @@
       <span class="chip">Dezvoltare custom</span>
       <span class="chip">Cod sursă 100% al tău</span>
     </div>
+    <div class="hint" style="margin-top:18px">💡 Treci cu mouse-ul peste orice funcționalitate (în carduri sau în tabel) ca să vezi ce înseamnă</div>
   </header>
 
   <div class="tiers">
@@ -110,14 +113,14 @@
       <div class="price">2.100 €</div>
       <div class="lei">≈ 10.500 lei</div>
       <ul>
-        <li>Catalog + variante (memorie, culoare)</li>
-        <li>Filtre de bază + căutare</li>
-        <li>Coș + checkout ca vizitator</li>
-        <li>Plată card online + ramburs</li>
-        <li>Facturare PF/firmă + e-Factura</li>
-        <li>Google Analytics + SEO de bază</li>
-        <li>Admin comenzi + produse</li>
-        <li>Conform legal + cod sursă al tău</li>
+        <li data-tip="<b>Catalog + variante</b>Fiecare telefon cu opțiunile lui (memorie, culoare) pe aceeași pagină, cu preț și stoc per variantă. <span class='bn'>→ Comenzi corecte, mai puține retururi.</span>">Catalog + variante (memorie, culoare)</li>
+        <li data-tip="<b>Filtre de bază + căutare</b>Filtrare după preț, marcă și stare, plus căutare de produse. <span class='bn'>→ Clienții găsesc rapid ce caută.</span>">Filtre de bază + căutare</li>
+        <li data-tip="<b>Checkout ca vizitator</b>Cumpără rapid, fără cont obligatoriu. <span class='bn'>→ Mai puține coșuri abandonate.</span>">Coș + checkout ca vizitator</li>
+        <li data-tip="<b>Plată card + ramburs</b>Card online (Netopia) și plata la livrare. <span class='bn'>→ Încasezi sigur și prinzi și clienții care preferă ramburs.</span>">Plată card online + ramburs</li>
+        <li data-tip="<b>Facturare + e-Factura</b>Factură automată pentru persoană fizică sau firmă, trimisă la ANAF. <span class='bn'>→ Zero muncă manuală, conform legal.</span>">Facturare PF/firmă + e-Factura</li>
+        <li data-tip="<b>Analytics + SEO de bază</b>Vezi traficul (câți intră, de unde) + optimizare de bază pentru Google. <span class='bn'>→ Trafic gratuit și decizii pe date.</span>">Google Analytics + SEO de bază</li>
+        <li data-tip="<b>Admin comenzi + produse</b>Panou simplu să adaugi produse și să procesezi comenzile. <span class='bn'>→ Administrezi singur, fără programator.</span>">Admin comenzi + produse</li>
+        <li data-tip="<b>Conform legal + cod sursă</b>Omnibus, ANPC, SOL, retur 14 zile — și codul e 100% al tău. <span class='bn'>→ Eviți amenzi ANPC și deții tot.</span>">Conform legal + cod sursă al tău</li>
       </ul>
     </div>
 
@@ -128,13 +131,13 @@
       <div class="lei">≈ 19.000 lei</div>
       <ul>
         <li>Tot din Standard, plus:</li>
-        <li>Filtre avansate (RAM, procesor, 5G)</li>
-        <li>Cont client + istoric comenzi</li>
-        <li>AWB automat — 1 curier</li>
-        <li>Wishlist + vouchere + recenzii</li>
-        <li>Google Shopping + SEO extins</li>
-        <li>Dashboard KPI + alerte stoc redus</li>
-        <li>Procesare automată (comenzi card)</li>
+        <li data-tip="<b>Filtre avansate</b>Filtrare pe specificații tehnice (RAM, procesor, 5G). <span class='bn'>→ Conversie mai bună la publicul care știe ce vrea.</span>">Filtre avansate (RAM, procesor, 5G)</li>
+        <li data-tip="<b>Cont client + istoric</b>Clientul își vede comenzile și adresele salvate. <span class='bn'>→ Clienți fideli care revin ușor.</span>">Cont client + istoric comenzi</li>
+        <li data-tip="<b>AWB automat (1 curier)</b>Generezi eticheta de expediere dintr-un clic din admin. <span class='bn'>→ Expediere rapidă, fără erori de adresă.</span>">AWB automat — 1 curier</li>
+        <li data-tip="<b>Wishlist + vouchere + recenzii</b>Salvare produse, coduri de reducere și recenzii de la clienți. <span class='bn'>→ Revin să cumpere, iar încrederea crește.</span>">Wishlist + vouchere + recenzii</li>
+        <li data-tip="<b>Google Shopping + SEO extins</b>Produsele în Google cu poză/preț + schema JSON-LD (rich snippets). <span class='bn'>→ Clienți noi și mai multe click-uri din Google.</span>">Google Shopping + SEO extins</li>
+        <li data-tip="<b>Dashboard KPI + alerte stoc</b>Vânzări, top produse și avertizare când un produs e pe terminate. <span class='bn'>→ Decizii rapide, nu rămâi fără stoc.</span>">Dashboard KPI + alerte stoc redus</li>
+        <li data-tip="<b>Procesare automată (card)</b>Comenzile plătite cu cardul se procesează singure. <span class='bn'>→ Mai puțină muncă de birou.</span>">Procesare automată (comenzi card)</li>
       </ul>
     </div>
 
@@ -145,13 +148,13 @@
       <div class="lei">≈ 25.500 lei</div>
       <ul>
         <li>Tot din Premium, plus:</li>
-        <li>Design custom 100% de la zero</li>
-        <li>AWB pe 3 curieri + Easybox</li>
-        <li>Chatbot pentru clienți</li>
-        <li>Automatizări n8n (coș abandonat etc.)</li>
-        <li>Integrare eMAG / compari.ro</li>
-        <li>Optimizare performanță + mentenanță</li>
-        <li>Procesare comenzi 100% automată</li>
+        <li data-tip="<b>Design custom 100%</b>Aspect unic, creat de la zero pentru brandul tău. <span class='bn'>→ Brand memorabil, mai multă încredere.</span>">Design custom 100% de la zero</li>
+        <li data-tip="<b>AWB 3 curieri + Easybox</b>Sameday, FAN și Cargus cu alegere automată + ridicare din locker 24/7. <span class='bn'>→ Mai multe opțiuni de livrare, mai multe comenzi.</span>">AWB pe 3 curieri + Easybox</li>
+        <li data-tip="<b>Chatbot pentru clienți</b>Asistent 24/7 care răspunde la întrebări (stoc, livrare, specificații). <span class='bn'>→ Vinde și noaptea, mai puține întrebări repetate.</span>">Chatbot pentru clienți</li>
+        <li data-tip="<b>Automatizări n8n</b>Email la coș abandonat, cerere de recenzie după livrare, sincronizare stoc. <span class='bn'>→ Recuperezi vânzări pierdute pe pilot automat.</span>">Automatizări n8n (coș abandonat etc.)</li>
+        <li data-tip="<b>Integrare eMAG / compari.ro</b>Produsele tale ajung și pe eMAG Marketplace și pe comparatoarele de prețuri. <span class='bn'>→ Expunere uriașă, vânzări în plus.</span>">Integrare eMAG / compari.ro</li>
+        <li data-tip="<b>Optimizare + mentenanță</b>Site rapid (Core Web Vitals) și întreținere continuă din partea mea. <span class='bn'>→ Ranking mai bun, clienți care nu pleacă.</span>">Optimizare performanță + mentenanță</li>
+        <li data-tip="<b>Procesare 100% automată</b>Tot lanțul (AWB, factură, email, stoc) rulează singur cu n8n. <span class='bn'>→ Munca de birou dispare aproape complet.</span>">Procesare comenzi 100% automată</li>
       </ul>
     </div>
   </div>
@@ -278,4 +281,4 @@
 })();
 </script>
 </body>
-</html>
+                                                                                                                                                                                                                                                                             </html>
