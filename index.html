@@ -26,7 +26,6 @@
 
   .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:40px 0 12px}
   .tier{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px 22px;display:flex;flex-direction:column;position:relative}
-  .tier.hi{border-color:var(--lime-dim)}
   .tier .dot{width:12px;height:12px;border-radius:50%;display:inline-block;margin-right:8px}
   .d-green{background:#7CD67C}.d-blue{background:#7fb2ff}.d-purple{background:#c58bff}
   .tier h3{font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;display:flex;align-items:center}
@@ -110,8 +109,8 @@
     <div class="tier">
       <h3><span class="dot d-green"></span>Standard</h3>
       <div class="role">Magazin funcțional, gata de vânzare</div>
-      <div class="price">2.100 €</div>
-      <div class="lei">≈ 10.500 lei</div>
+      <div class="price">1.700 €</div>
+      <div class="lei">≈ 8.500 lei</div>
       <ul>
         <li data-tip="<b>Catalog + variante</b>Fiecare telefon cu opțiunile lui (memorie, culoare) pe aceeași pagină, cu preț și stoc per variantă. <span class='bn'>→ Comenzi corecte, mai puține retururi.</span>">Catalog + variante (memorie, culoare)</li>
         <li data-tip="<b>Filtre de bază + căutare</b>Filtrare după preț, marcă și stare, plus căutare de produse. <span class='bn'>→ Clienții găsesc rapid ce caută.</span>">Filtre de bază + căutare</li>
@@ -127,8 +126,8 @@
     <div class="tier">
       <h3><span class="dot d-blue"></span>Premium</h3>
       <div class="role">Magazin serios, ușor de administrat</div>
-      <div class="price">3.800 €</div>
-      <div class="lei">≈ 19.000 lei</div>
+      <div class="price">3.200 €</div>
+      <div class="lei">≈ 16.000 lei</div>
       <ul>
         <li>Tot din Standard, plus:</li>
         <li data-tip="<b>Filtre avansate</b>Filtrare pe specificații tehnice (RAM, procesor, 5G). <span class='bn'>→ Conversie mai bună la publicul care știe ce vrea.</span>">Filtre avansate (RAM, procesor, 5G)</li>
@@ -141,18 +140,17 @@
       </ul>
     </div>
 
-    <div class="tier hi">
+    <div class="tier">
       <h3><span class="dot d-purple"></span>Luxury</h3>
       <div class="role">Platformă premium, complet automatizată</div>
-      <div class="price">5.100 €</div>
-      <div class="lei">≈ 25.500 lei</div>
+      <div class="price">4.200 €</div>
+      <div class="lei">≈ 21.000 lei</div>
       <ul>
         <li>Tot din Premium, plus:</li>
         <li data-tip="<b>Design custom 100%</b>Aspect unic, creat de la zero pentru brandul tău. <span class='bn'>→ Brand memorabil, mai multă încredere.</span>">Design custom 100% de la zero</li>
         <li data-tip="<b>AWB 3 curieri + Easybox</b>Sameday, FAN și Cargus cu alegere automată + ridicare din locker 24/7. <span class='bn'>→ Mai multe opțiuni de livrare, mai multe comenzi.</span>">AWB pe 3 curieri + Easybox</li>
         <li data-tip="<b>Chatbot pentru clienți</b>Asistent 24/7 care răspunde la întrebări (stoc, livrare, specificații). <span class='bn'>→ Vinde și noaptea, mai puține întrebări repetate.</span>">Chatbot pentru clienți</li>
         <li data-tip="<b>Automatizări n8n</b>Email la coș abandonat, cerere de recenzie după livrare, sincronizare stoc. <span class='bn'>→ Recuperezi vânzări pierdute pe pilot automat.</span>">Automatizări n8n (coș abandonat etc.)</li>
-        <li data-tip="<b>Integrare eMAG / compari.ro</b>Produsele tale ajung și pe eMAG Marketplace și pe comparatoarele de prețuri. <span class='bn'>→ Expunere uriașă, vânzări în plus.</span>">Integrare eMAG / compari.ro</li>
         <li data-tip="<b>Optimizare + mentenanță</b>Site rapid (Core Web Vitals) și întreținere continuă din partea mea. <span class='bn'>→ Ranking mai bun, clienți care nu pleacă.</span>">Optimizare performanță + mentenanță</li>
         <li data-tip="<b>Procesare 100% automată</b>Tot lanțul (AWB, factură, email, stoc) rulează singur cu n8n. <span class='bn'>→ Munca de birou dispare aproape complet.</span>">Procesare comenzi 100% automată</li>
       </ul>
@@ -191,7 +189,6 @@
       <tr><td class="feat-name" data-tip="<b>Procesare automată comenzi</b>Comenzile se procesează singure: parțial la Premium (card), complet cu n8n la Luxury (AWB, factură, email, stoc). <span class='bn'>→ Munca de birou dispare aproape complet.</span>">Procesare automată comenzi</td><td class="c no">—</td><td class="c mini">parțial (card)</td><td class="c mini">complet (n8n)</td></tr>
       <tr><td class="feat-name" data-tip="<b>Chatbot pentru clienți</b>Asistent 24/7 care răspunde la întrebări (stoc, livrare, specificații). <span class='bn'>→ Vinde și noaptea, mai puține întrebări repetate.</span>">Chatbot pentru clienți</td><td class="c no">—</td><td class="c no">—</td><td class="c yes">✓</td></tr>
       <tr><td class="feat-name" data-tip="<b>Automatizări n8n</b>Email la coș abandonat, cerere de recenzie după livrare, sincronizare stoc. <span class='bn'>→ Recuperezi vânzări pierdute pe pilot automat.</span>">Automatizări n8n (coș abandonat etc.)</td><td class="c no">—</td><td class="c no">—</td><td class="c yes">✓</td></tr>
-      <tr><td class="feat-name" data-tip="<b>Integrare eMAG / compari.ro</b>Produsele tale ajung și pe eMAG Marketplace și pe comparatoare. <span class='bn'>→ Expunere uriașă, vânzări în plus.</span>">Integrare eMAG / compari.ro</td><td class="c no">—</td><td class="c no">—</td><td class="c yes">✓</td></tr>
       <tr><td class="feat-name" data-tip="<b>Design</b>Temă personalizată la Standard/Premium; design unic, de la zero, la Luxury. <span class='bn'>→ Brand memorabil și mai multă încredere.</span>">Design</td><td class="c mini">temă person.</td><td class="c mini">temă person.</td><td class="c mini">custom 100%</td></tr>
       <tr><td class="feat-name" data-tip="<b>Optimizare performanță + mentenanță</b>Site rapid (Core Web Vitals) și întreținere continuă. <span class='bn'>→ Ranking mai bun și clienți care nu pleacă.</span>">Optimizare performanță + mentenanță</td><td class="c no">—</td><td class="c no">—</td><td class="c yes">✓</td></tr>
       <tr><td class="feat-name" data-tip="<b>Conform legal (Omnibus, ANPC, SOL)</b>Preț 30 zile, linkuri ANPC-SAL și SOL, retur 14 zile, garanție afișată. <span class='bn'>→ Eviți amenzile ANPC.</span>">Conform legal (Omnibus, ANPC, SOL)</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
@@ -243,13 +240,23 @@
     <div class="help" style="color:var(--muted);font-size:13.5px"><b style="color:var(--lime)">Cum te ajută:</b> munca de birou dispare aproape complet — te ocupi doar de împachetat și expediat. Recuperezi și vânzări pierdute (coș abandonat) pe pilot automat.</div>
   </div>
   <div class="card"><div class="name"><span>Chatbot pentru clienți</span><span class="tags"><i class="t-l">L</i></span></div><div class="what">Un asistent care răspunde 24/7 la întrebări: stoc, timp de livrare, specificații, „care telefon e mai bun pentru...".</div><div class="help"><b>Cum te ajută:</b> vinde și noaptea, când tu dormi, și scade numărul de întrebări repetate.</div></div>
-  <div class="card"><div class="name"><span>Integrare eMAG / compari.ro</span><span class="tags"><i class="t-l">L</i></span></div><div class="what">Produsele tale ajung și pe eMAG Marketplace și pe comparatoarele de prețuri.</div><div class="help"><b>Cum te ajută:</b> expunere uriașă în fața unui public pe care singur nu l-ai atinge — vânzări în plus.</div></div>
 
   <div class="grp">Design, tehnic & legal</div>
   <div class="card"><div class="name"><span>Design — temă personalizată vs. custom 100%</span><span class="tags"><i class="t-s">S</i><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">La Standard/Premium pornim de la o temă adaptată brandului tău; la Luxury se face un design unic, de la zero.</div><div class="help"><b>Cum te ajută:</b> un aspect memorabil și profesional crește încrederea și te diferențiază de concurență.</div></div>
   <div class="card"><div class="name"><span>Optimizare performanță + mentenanță</span><span class="tags"><i class="t-l">L</i></span></div><div class="what">Site rapid (scoruri bune Core Web Vitals) și întreținere continuă din partea mea.</div><div class="help"><b>Cum te ajută:</b> Google te ranchează mai sus, iar clienții nu pleacă de la un site lent.</div></div>
   <div class="card"><div class="name"><span>Conform legal (Omnibus, ANPC, SOL)</span><span class="tags"><i class="t-s">S</i><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Prețul cel mai mic din ultimele 30 de zile lângă reduceri, linkuri ANPC-SAL și SOL, retur 14 zile, garanție afișată.</div><div class="help"><b>Cum te ajută:</b> eviți amenzile ANPC (pot fi mari) și arăți serios în fața clienților.</div></div>
   <div class="card"><div class="name"><span>Cod sursă + hosting + domeniu .ro</span><span class="tags"><i class="t-s">S</i><i class="t-p">P</i><i class="t-l">L</i></span></div><div class="what">Codul magazinului e 100% al tău, iar eu îl pun online pe hosting cu domeniu .ro.</div><div class="help"><b>Cum te ajută:</b> deții totul, nu depinzi de nimeni și poți muta magazinul oricând.</div></div>
+
+  <h2>Dezvoltări ulterioare (opționale)</h2>
+  <div class="h2sub">Idei de extindere — <b style="color:#d4d4d8">nu sunt incluse în prețurile de mai sus</b>. Se cotează separat, doar dacă și când îți sunt de folos.</div>
+  <div class="tiers" style="grid-template-columns:repeat(3,1fr)">
+    <div class="card"><div class="name"><span>Integrare eMAG Marketplace</span></div><div class="what">Produsele tale sincronizate și pe eMAG, cu comenzile preluate în același admin.</div><div class="help"><b>Când merită:</b> după ce magazinul merge, ca să prinzi publicul uriaș de pe eMAG.</div></div>
+    <div class="card"><div class="name"><span>Comparatoare de prețuri (compari.ro etc.)</span></div><div class="what">Feed automat către comparatoarele de prețuri.</div><div class="help"><b>Când merită:</b> trafic suplimentar de la cei care compară prețuri.</div></div>
+    <div class="card"><div class="name"><span>Aplicație mobilă / PWA</span></div><div class="what">Magazinul instalabil pe telefon, cu notificări push.</div><div class="help"><b>Când merită:</b> pentru clienți fideli și campanii prin notificări.</div></div>
+    <div class="card"><div class="name"><span>Program de fidelitate + puncte</span></div><div class="what">Puncte de loialitate, niveluri și recompense.</div><div class="help"><b>Când merită:</b> ca să crești comenzile repetate.</div></div>
+    <div class="card"><div class="name"><span>Marketing automation avansat</span></div><div class="what">Fluxuri de email/SMS pe comportamentul clientului (segmentare, remarketing).</div><div class="help"><b>Când merită:</b> când ai volum și vrei să vinzi mai mult din baza existentă.</div></div>
+    <div class="card"><div class="name"><span>Multilingv (RO + EN)</span></div><div class="what">A doua limbă și, opțional, livrare internațională.</div><div class="help"><b>Când merită:</b> dacă vrei să vinzi și în afara României.</div></div>
+  </div>
 
   <div class="note">
     <b>Costuri recurente (anuale, independent de dezvoltare):</b> hosting ~60–300 €/an · domeniu .ro ~12–15 €/an · abonament SmartBill ~120–300 €/an · Netopia — fără abonament, comision ~1,5–2,5% pe tranzacție · mentenanță (dacă nu e inclusă) ~200–800 €/an. Curieri: fără taxă lunară de API, plătești per colet.
@@ -281,4 +288,4 @@
 })();
 </script>
 </body>
-                                                                                                                                                                                                                                                                             </html>
+  </html>
