@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chestionar — Ce fel de magazin online îți dorești?</title>
+<style>
+  :root{
+    --bg:#0b0b0c; --panel:#141416; --panel2:#1a1a1d; --line:#2a2a2f;
+    --txt:#f4f4f6; --muted:#9a9aa2; --lime:#c6f000; --lime-dim:#9fc400;
+    --yes:#7CD67C; --maybe:#f0c24b; --no:#8a8a92;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:40px 20px 90px}
+  header.top{padding-bottom:22px;border-bottom:1px solid var(--line);margin-bottom:8px}
+  .brand{font-size:20px;font-weight:800}
+  .brand span{color:var(--lime)}
+  h1{font-size:29px;font-weight:800;line-height:1.2;margin:18px 0 10px}
+  .sub{color:var(--muted);font-size:15px;max-width:660px}
+  .kicker{color:var(--lime);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-top:20px}
+  .progress-wrap{position:sticky;top:0;z-index:50;background:rgba(11,11,12,.92);backdrop-filter:blur(8px);padding:12px 0;border-bottom:1px solid var(--line);margin-bottom:26px}
+  .progress-info{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:6px}
+  .progress-info b{color:var(--lime)}
+  .bar{height:6px;background:var(--panel2);border-radius:6px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0%;background:var(--lime);border-radius:6px;transition:width .3s}
+  .grp{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--lime);margin:38px 0 6px;display:flex;align-items:center;gap:10px}
+  .grp .num{width:24px;height:24px;line-height:24px;text-align:center;border:1px solid var(--lime-dim);border-radius:50%;font-size:11px;flex-shrink:0}
+  .grp-sub{color:var(--muted);font-size:13px;margin-bottom:14px}
+  .included{background:linear-gradient(180deg,#151a09,#131314);border:1px solid var(--lime-dim);border-radius:14px;padding:16px 18px;margin-bottom:14px}
+  .included h4{color:var(--lime);font-size:14px;margin-bottom:8px}
+  .included ul{list-style:none;font-size:13.5px;color:#d8d8dc}
+  .included li{padding:3px 0 3px 22px;position:relative}
+  .included li::before{content:"✓";position:absolute;left:0;color:var(--lime);font-weight:800}
+  .included p{font-size:12.5px;color:var(--muted);margin-top:8px}
+  .q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:12px;transition:border-color .2s}
+  .q.answered{border-color:#3a4d17}
+  .q .qt{font-weight:700;font-size:15.5px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+  .q .qt .check{color:var(--lime);font-size:13px;opacity:0;transition:opacity .2s}
+  .q.answered .qt .check{opacity:1}
+  .q .expl{color:#cfcfd4;font-size:13.5px;margin:7px 0 3px}
+  .q .win{color:var(--muted);font-size:13px;margin-bottom:13px}
+  .q .win b{color:var(--lime);font-weight:700}
+  .opts3{display:flex;gap:8px;flex-wrap:wrap}
+  .opts3 button{flex:1;min-width:110px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);color:var(--muted);font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s}
+  .opts3 button:hover{border-color:#4a4a52;color:var(--txt)}
+  .opts3 button.sel-yes{background:rgba(124,214,124,.13);border-color:var(--yes);color:var(--yes)}
+  .opts3 button.sel-maybe{background:rgba(240,194,75,.12);border-color:var(--maybe);color:var(--maybe)}
+  .opts3 button.sel-no{background:rgba(138,138,146,.12);border-color:var(--no);color:#c9c9cf}
+  .lvls{display:flex;flex-direction:column;gap:8px}
+  .lvls label{display:flex;gap:12px;align-items:flex-start;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px 14px;cursor:pointer;transition:.15s}
+  .lvls label:hover{border-color:#4a4a52}
+  .lvls label.on{border-color:var(--lime);background:rgba(198,240,0,.06)}
+  .lvls input{margin-top:4px;accent-color:var(--lime)}
+  .lvls .lt{font-weight:700;font-size:14px}
+  .lvls .ld{color:var(--muted);font-size:12.5px;margin-top:2px}
+  .field{margin-bottom:12px}
+  .field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
+  .field label small{color:var(--muted);font-weight:400}
+  .field input[type=text],.field input[type=tel],.field input[type=email],.field textarea{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:10px;color:var(--txt);padding:11px 13px;font-size:14px;font-family:inherit}
+  .field textarea{min-height:80px;resize:vertical}
+  .field textarea.big{min-height:130px}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--lime-dim)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}}
+  .finish{margin-top:44px;background:linear-gradient(180deg,#161a0a,#121213);border:1px solid var(--lime-dim);border-radius:16px;padding:24px}
+  .finish h3{color:var(--lime);font-size:18px;margin-bottom:6px}
+  .finish p{font-size:13.5px;color:var(--muted);margin-bottom:16px}
+  .btn{display:inline-block;background:var(--lime);color:#0b0b0c;font-weight:800;font-size:15px;padding:13px 26px;border-radius:12px;border:none;cursor:pointer;transition:.15s}
+  .btn:hover{background:#d4ff1a}
+  .btn:disabled{opacity:.5;cursor:wait}
+  .btn.sec{background:var(--panel2);color:var(--txt);border:1px solid var(--line);font-weight:600}
+  .btn.sec:hover{border-color:var(--lime-dim);color:var(--lime)}
+  .btnrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  #sentOk{display:none;margin-top:16px;background:rgba(124,214,124,.1);border:1px solid var(--yes);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--yes);font-weight:700}
+  #sentFail{display:none;margin-top:16px;background:rgba(240,194,75,.08);border:1px solid var(--maybe);border-radius:12px;padding:14px 16px;font-size:13.5px;color:var(--maybe)}
+  #summaryBox{display:none;margin-top:18px}
+  #summaryBox textarea{width:100%;min-height:320px;background:#0d0d0e;border:1px solid var(--line);border-radius:12px;color:#d8d8dc;padding:14px;font-size:12.5px;font-family:ui-monospace,Menlo,Consolas,monospace;line-height:1.6}
+  .copied{color:var(--lime);font-size:13px;font-weight:700;opacity:0;transition:opacity .3s}
+  .copied.show{opacity:1}
+  .missing{color:#f0c24b;font-size:13px;margin-top:10px;display:none}
+  footer{margin-top:44px;border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">Flavius <span>Vranău</span> · dezvoltare web</div>
+    <div class="kicker">Chestionar de proiect</div>
+    <h1>Ce fel de magazin online îți dorești?</h1>
+    <p class="sub">Durează ~5–7 minute. Pentru fiecare funcționalitate îți explic pe scurt <b style="color:#e6e6ea">ce este</b> și <b style="color:#e6e6ea">cu ce te ajută</b> — tu doar alegi: <b style="color:var(--yes)">Sigur o vreau</b>, <b style="color:var(--maybe)">Poate</b> sau <b style="color:var(--no)">Nu o doresc</b>. Nu există răspunsuri greșite — pe baza lor îți pregătesc o ofertă exactă, fără să plătești pentru lucruri de care nu ai nevoie.</p>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-info"><span>Progres completare</span><span><b id="pDone">0</b> / <span id="pTotal">0</span> răspunsuri</span></div>
+    <div class="bar"><i id="pBar"></i></div>
+  </div>
+
+  <div class="grp"><span class="num">1</span> Despre tine și afacerea ta</div>
+  <div class="grp-sub">Ca să știu cu cine vorbesc și la ce scară gândim magazinul.</div>
+
+  <div class="q" data-field>
+    <div class="grid2">
+      <div class="field"><label>Numele tău *</label><input type="text" id="f_nume" placeholder="ex: Ion Popescu"></div>
+      <div class="field"><label>Firma <small>(dacă există)</small></label><input type="text" id="f_firma" placeholder="ex: GSM Shop SRL"></div>
+      <div class="field"><label>Telefon *</label><input type="tel" id="f_tel" placeholder="07xx xxx xxx"></div>
+      <div class="field"><label>Email</label><input type="email" id="f_email" placeholder="nume@email.ro"></div>
+    </div>
+  </div>
+
+  <div class="q" data-q="produse" data-type="lvl">
+    <div class="qt"><span>Cam câte produse vei avea în magazin? <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">Numără tot ce vinzi: telefoane, huse, folii, încărcătoare, dar și piese — ecrane, baterii, conectori, camere etc. (Fiecare culoare/memorie nu se numără separat.)</div>
+    <div class="win"><b>De ce întreb:</b> de la asta pornește mărimea magazinului și felul în care organizăm catalogul.</div>
+    <div class="lvls">
+      <label><input type="radio" name="produse" value="sub 100"><div><div class="lt">Sub 100 de produse</div><div class="ld">Magazin mic, ușor de administrat manual.</div></div></label>
+      <label><input type="radio" name="produse" value="100–500"><div><div class="lt">Între 100 și 500</div><div class="ld">Mărimea tipică pentru un magazin GSM local.</div></div></label>
+      <label><input type="radio" name="produse" value="500–1.000"><div><div class="lt">Între 500 și 1.000</div><div class="ld">Catalog serios — de obicei telefoane + accesorii + piese.</div></div></label>
+      <label><input type="radio" name="produse" value="peste 1.000"><div><div class="lt">Peste 1.000</div><div class="ld">Catalog mare (multe piese/modele) — organizăm încărcarea automată.</div></div></label>
+    </div>
+  </div>
+
+  <div class="q" data-q="incarcare" data-type="lvl">
+    <div class="qt"><span>Cum vor ajunge produsele în magazin? <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">La zeci de produse le poți adăuga de mână. La sute sau mii (mai ales piese), e mult mai practic să le încărcăm dintr-o listă (Excel) sau direct de la furnizorul tău — adică magazinul „se umple singur" și stocul se ține la zi automat.</div>
+    <div class="win"><b>De ce întreb:</b> introducerea produselor e adesea cea mai mare muncă la un magazin — o planificăm de la început.</div>
+    <div class="lvls">
+      <label><input type="radio" name="incarcare" value="le adaug eu, manual"><div><div class="lt">Le adaug eu, de mână</div><div class="ld">Primești panoul și le introduci tu, în ritmul tău.</div></div></label>
+      <label><input type="radio" name="incarcare" value="import inițial din lista mea (Excel)"><div><div class="lt">Am o listă (Excel) — să fie încărcate la început</div><div class="ld">Îmi dai lista ta, eu o încarc în magazin la lansare.</div></div></label>
+      <label><input type="radio" name="incarcare" value="legătură automată cu furnizorul (stoc/prețuri la zi)"><div><div class="lt">Legătură automată cu furnizorul</div><div class="ld">Produsele, prețurile și stocul vin și se actualizează singure de la furnizorul tău.</div></div></label>
+    </div>
+  </div>
+
+  <div class="q" data-q="termen" data-type="lvl">
+    <div class="qt"><span>Când ai vrea să fie gata magazinul? <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="lvls">
+      <label><input type="radio" name="termen" value="cât mai repede (sub 1 lună)"><div><div class="lt">Cât mai repede (sub 1 lună)</div></div></label>
+      <label><input type="radio" name="termen" value="1–2 luni"><div><div class="lt">În 1–2 luni</div></div></label>
+      <label><input type="radio" name="termen" value="nu mă grăbesc"><div><div class="lt">Nu mă grăbesc, vreau să iasă bine</div></div></label>
+    </div>
+  </div>
+
+  <div class="grp"><span class="num">2</span> Ce primești oricum, în orice variantă</div>
+  <div class="grp-sub">Astea nu se plătesc separat și nu trebuie să le alegi — sunt temelia oricărui magazin făcut de mine.</div>
+  <div class="included">
+    <h4>Incluse întotdeauna:</h4>
+    <ul>
+      <li><b>Design personalizat pe brandul tău</b> — sigla, culorile și stilul tău, aspect modern și profesional</li>
+      <li><b>Catalog cu variante</b> — fiecare telefon cu memoriile și culorile lui, fiecare cu preț și stoc propriu</li>
+      <li><b>Coș + finalizare comandă fără cont</b> — clientul cumpără rapid, fără să fie obligat să-și facă cont</li>
+      <li><b>Filtre de bază + căutare</b> — după preț, marcă, categorie</li>
+      <li><b>Stoc în timp real</b> — când se vinde ultimul produs, dispare automat de la vânzare; nu vinzi niciodată ce nu ai</li>
+      <li><b>Email de confirmare</b> — clientul primește automat confirmarea comenzii</li>
+      <li><b>Panou de administrare</b> — adaugi produse și procesezi comenzile singur, fără programator</li>
+      <li><b>Aspect impecabil pe telefon</b> — majoritatea clienților cumpără de pe mobil</li>
+      <li><b>Conform legislației din România</b> — retur 14 zile, ANPC, reguli de afișare a reducerilor (eviți amenzile)</li>
+      <li><b>Punere online</b> — găzduire + domeniu .ro + lansare, la cheie</li>
+    </ul>
+    <p>Mai jos vin doar lucrurile pe care le poți alege — cele care diferă de la magazin la magazin.</p>
+  </div>
+
+  <div class="grp"><span class="num">3</span> Catalogul tău: piese, second-hand, căutare</div>
+
+  <div class="q" data-q="piese_compat" data-type="ymn">
+    <div class="qt"><span>Căutare piese după modelul telefonului <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">Clientul alege întâi telefonul lui („iPhone 13", „Samsung A54") și vede <b>doar piesele și accesoriile care se potrivesc</b> — ecran, baterie, husă, folie pentru fix acel model. Fără să mai ghicească dacă „merge la al meu".</div>
+    <div class="win"><b>Cu ce te ajută:</b> la piese, asta e diferența dintre „a vândut" și „a plecat" — clientul nu riscă să comande piesa greșită, iar tu nu mai pierzi timp cu retururi și explicații la telefon.</div>
+    <div class="opts3" data-name="piese_compat"></div>
+  </div>
+
+  <div class="q" data-q="secondhand" data-type="ymn">
+    <div class="qt"><span>Produse second-hand / resigilate, marcate clar <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">Dacă vinzi și telefoane second-hand sau resigilate, fiecare produs primește o etichetă vizibilă (ex. „RESIGILAT", „SECOND-HAND — stare A") și propria garanție (ex. 24 de luni la nou, 12 la second-hand), afișată lângă preț.</div>
+    <div class="win"><b>Cu ce te ajută:</b> clientul știe exact ce cumpără — încredere mai mare, reclamații mai puține, și vinzi liniștit ambele categorii în același magazin.</div>
+    <div class="opts3" data-name="secondhand"></div>
+  </div>
+
+  <div class="q" data-q="filtre_avansate" data-type="ymn">
+    <div class="qt"><span>Filtre avansate pe specificații (memorie RAM, procesor, 5G…) <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">Pe lângă filtrele de bază (preț, marcă), clientul poate căuta fin: „telefoane cu minim 8 GB RAM", „doar cu 5G", „cu baterie mare" etc.</div>
+    <div class="win"><b>Cu ce te ajută:</b> clienții pricepuți, care știu exact ce vor, găsesc imediat produsul — altfel pleacă la un magazin care le oferă asta.</div>
+    <div class="opts3" data-name="filtre_avansate"></div>
+  </div>
+
+  <div class="q" data-q="limita" data-type="ymn">
+    <div class="qt"><span>Limită de cumpărare pe client <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">Poți seta, de exemplu, „maxim 2 bucăți din același model per comandă", ca să nu-ți golească cineva stocul (revânzători, comenzi-farsă).</div>
+    <div class="win"><b>Cu ce te ajută:</b> stocul rămâne pentru clienții reali, nu pentru speculanți.</div>
+    <div class="opts3" data-name="limita"></div>
+  </div>
+
+  <div class="grp"><span class="num">4</span> Cum plătesc clienții tăi</div>
+
+  <div class="q" data-q="plata" data-type="lvl">
+    <div class="qt"><span>Ce metode de plată vrei să oferi? <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl"><b>Ramburs</b> = clientul plătește la ușă, când primește coletul. <b>Plata cu cardul</b> = plătește pe site, cu cardul, iar banii intră direct în contul tău (prin Netopia, procesatorul român de plăți).</div>
+    <div class="win"><b>Cu ce te ajută:</b> cardul îți aduce banii pe loc și elimină coletele refuzate; rambursul aduce clienții care nu au încredere să plătească înainte. În România, multe magazine le oferă pe amândouă.</div>
+    <div class="lvls">
+      <label><input type="radio" name="plata" value="doar card online"><div><div class="lt">Doar plata cu cardul</div><div class="ld">Bani siguri, pe loc. Fără riscul coletelor refuzate la ușă.</div></div></label>
+      <label><input type="radio" name="plata" value="doar ramburs"><div><div class="lt">Doar ramburs (plata la livrare)</div><div class="ld">Cel mai simplu de pornit, dar riști colete refuzate.</div></div></label>
+      <label><input type="radio" name="plata" value="card + ramburs"><div><div class="lt">Amândouă — card + ramburs</div><div class="ld">Prinzi toți clienții. Alegerea cea mai des întâlnită.</div></div></label>
+    </div>
+  </div>
+
+  <div class="q" data-q="facturare" data-type="lvl">
+    <div class="qt"><span>Cum vrei să se facă facturile? <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl"><b>e-Factura</b> = sistemul statului prin care facturile ajung obligatoriu la ANAF. <b>SmartBill</b> = un program românesc de facturat care face asta automat pentru tine.</div>
+    <div class="win"><b>Cu ce te ajută varianta automată:</b> la fiecare comandă, factura se face singură (și pentru persoane fizice, și pentru firme cu CUI) și pleacă singură la ANAF. Zero muncă de birou, zero facturi uitate.</div>
+    <div class="lvls">
+      <label><input type="radio" name="facturare" value="manual (îmi fac singur facturile)"><div><div class="lt">Le fac eu manual</div><div class="ld">Tu emiți facturile din programul tău, pentru fiecare comandă.</div></div></label>
+      <label><input type="radio" name="facturare" value="automat cu SmartBill + e-Factura"><div><div class="lt">Automat — SmartBill + e-Factura</div><div class="ld">Factura se emite și pleacă la ANAF singură, la fiecare comandă.</div></div></label>
+    </div>
+  </div>
+
+  <div class="grp"><span class="num">5</span> Cum ajung comenzile la clienți</div>
+
+  <div class="q" data-q="awb" data-type="lvl">
+    <div class="qt"><span>Cum vrei să pregătești expedierile (AWB-urile)? <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl"><b>AWB</b> = eticheta care se lipește pe colet (cu adresa clientului și numărul de urmărire). Se poate face manual — intri pe site-ul curierului și scrii datele fiecărei comenzi — sau automat, dintr-un singur click din panoul magazinului: datele clientului se completează singure, tu doar printezi eticheta.</div>
+    <div class="win"><b>Cu ce te ajută varianta automată:</b> la 5–10 comenzi pe zi economisești ore întregi și elimini greșelile de adresă. Clientul primește automat și link de urmărire a coletului.</div>
+    <div class="lvls">
+      <label><input type="radio" name="awb" value="manual, pe site-ul curierului"><div><div class="lt">Manual</div><div class="ld">Intru eu pe site-ul curierului și fac eticheta pentru fiecare comandă.</div></div></label>
+      <label><input type="radio" name="awb" value="automat cu 1 curier"><div><div class="lt">Automat, cu un curier</div><div class="ld">Un click din panou → etichetă gata. Alegi curierul preferat (ex. Sameday sau FAN).</div></div></label>
+      <label><input type="radio" name="awb" value="automat cu toți curierii (Sameday + FAN + Cargus)"><div><div class="lt">Automat, cu toți curierii</div><div class="ld">Sameday + FAN + Cargus — alegi la fiecare comandă sau lași sistemul să aleagă.</div></div></label>
+    </div>
+  </div>
+
+  <div class="q" data-q="easybox" data-type="ymn">
+    <div class="qt"><span>Ridicare din Easybox (dulapurile cu cutii) <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">Easybox = dulapurile acelea cu cutiuțe din benzinării și supermarketuri, de unde clientul își ridică singur coletul, la orice oră, cu un cod.</div>
+    <div class="win"><b>Cu ce te ajută:</b> foarte mulți români preferă să ridice de la Easybox în loc să aștepte curierul acasă. Unii cumpără doar dacă există opțiunea asta.</div>
+    <div class="opts3" data-name="easybox"></div>
+  </div>
+
+  <div class="q" data-q="ridicare" data-type="ymn">
+    <div class="qt"><span>Ridicare din magazinul tău fizic <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">Clientul comandă online și alege „ridic din magazin" — vine și își ia produsul de la tine, fără costuri de livrare. (Are sens doar dacă ai un magazin fizic.)</div>
+    <div class="win"><b>Cu ce te ajută:</b> clienții din orașul tău primesc produsul mai repede și gratis, iar când vin la tine în magazin, de multe ori mai cumpără ceva pe loc.</div>
+    <div class="opts3" data-name="ridicare"></div>
+  </div>
+
+  <div class="grp"><span class="num">6</span> Clienți fideli și vânzări în plus</div>
+
+  <div class="q" data-q="cont" data-type="ymn">
+    <div class="qt"><span>Cont de client (cu istoricul comenzilor) <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">Cine dorește își poate face cont pe site: își vede comenzile vechi, adresa salvată, și comandă mai repede data viitoare. (Rămâne posibil să cumperi și fără cont.)</div>
+    <div class="win"><b>Cu ce te ajută:</b> clienții care revin cumpără mai des și mai ușor — ei sunt cei mai profitabili.</div>
+    <div class="opts3" data-name="cont"></div>
+  </div>
+
+  <div class="q" data-q="vouchere" data-type="ymn">
+    <div class="qt"><span>Cupoane de reducere + listă de dorințe <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">Tu poți crea coduri de reducere (ex. „BUNVENIT10" = -10%) pentru campanii, iar clientul poate salva produse „pe mai târziu" într-o listă de dorințe.</div>
+    <div class="win"><b>Cu ce te ajută:</b> reducerile aduc clienți noi și grăbesc decizia; lista de dorințe îi aduce înapoi pe cei care „se mai gândesc".</div>
+    <div class="opts3" data-name="vouchere"></div>
+  </div>
+
+  <div class="q" data-q="recenzii" data-type="ymn">
+    <div class="qt"><span>Păreri de la clienți + produse recomandate în coș <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">Sub fiecare produs apar părerile (stelele) clienților care l-au cumpărat, iar în coș site-ul recomandă automat accesorii potrivite: „Ai luat iPhone? Ia și husa și folia."</div>
+    <div class="win"><b>Cu ce te ajută:</b> părerile dau încredere (oamenii cumpără ce văd că au cumpărat alții), iar recomandările din coș cresc valoarea fiecărei comenzi — vinzi husa și folia la fiecare telefon.</div>
+    <div class="opts3" data-name="recenzii"></div>
+  </div>
+
+  <div class="q" data-q="whatsapp" data-type="ymn">
+    <div class="qt"><span>Buton „Întreabă pe WhatsApp" la fiecare produs <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">Lângă fiecare produs apare un buton care deschide direct o conversație WhatsApp cu tine, cu produsul deja menționat: „Bună, mă interesează iPhone 13, 128 GB…".</div>
+    <div class="win"><b>Cu ce te ajută:</b> mulți clienți vor să întrebe ceva înainte să cumpere („e negociabil?", „îl aveți pe albastru?") — dacă pot să te întrebe într-o secundă, nu mai pleacă de pe site. Iar tu vinzi direct din conversație.</div>
+    <div class="opts3" data-name="whatsapp"></div>
+  </div>
+
+  <div class="grp"><span class="num">7</span> Cum te găsesc clienții pe Google</div>
+
+  <div class="q" data-q="analytics" data-type="ymn">
+    <div class="qt"><span>Statistici de vizitatori (Google Analytics) <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">Un „contor" gratuit de la Google care îți arată: câți oameni îți intră pe site, de unde vin (Google, Facebook, TikTok…), ce pagini se uită și câți ajung să cumpere.</div>
+    <div class="win"><b>Cu ce te ajută:</b> vezi negru pe alb ce funcționează — de exemplu, dacă reclama pe care dai bani chiar aduce cumpărători sau doar vizitatori.</div>
+    <div class="opts3" data-name="analytics"></div>
+  </div>
+
+  <div class="q" data-q="gshopping" data-type="ymn">
+    <div class="qt"><span>Produsele tale afișate direct în Google (Google Shopping) <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">Pe românește: când cineva caută pe Google „iPhone 15 preț", îi apar direct produse cu poză și preț, de la diverse magazine. Cu această funcție, printre ele apar și <b>produsele tale</b> — cu poza, prețul și numele magazinului tău.</div>
+    <div class="win"><b>Cu ce te ajută:</b> ești văzut exact de omul care caută chiar acum telefonul pe care tu îl vinzi — cel mai „copt" client posibil. Afișarea de bază e gratuită; reclamele plătite sunt opționale.</div>
+    <div class="opts3" data-name="gshopping"></div>
+  </div>
+
+  <div class="q" data-q="seo" data-type="lvl">
+    <div class="qt"><span>Optimizarea pentru căutări pe Google (SEO) <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">SEO = tot ce facem ca Google să-ți afișeze magazinul cât mai sus când lumea caută „telefoane [orașul tău]" sau „ecran iPhone 13". <b>De bază</b> = titluri corecte, site rapid, hartă pentru Google. <b>Extins</b> = în plus, Google afișează sub linkul tău direct <b>prețul și steluțele produsului</b> (așa cum vezi la magazinele mari) + pagini optimizate pe căutările locale.</div>
+    <div class="win"><b>Cu ce te ajută varianta extinsă:</b> un rezultat cu preț și steluțe primește mult mai multe click-uri decât un link simplu — adică vizitatori gratis, fără să plătești reclame.</div>
+    <div class="lvls">
+      <label><input type="radio" name="seo" value="de bază"><div><div class="lt">De bază</div><div class="ld">Suficient ca Google să te găsească și să te afișeze corect.</div></div></label>
+      <label><input type="radio" name="seo" value="extins (preț + steluțe în Google)"><div><div class="lt">Extins</div><div class="ld">Prețul și steluțele apar direct în rezultatele Google + pagini optimizate local.</div></div></label>
+    </div>
+  </div>
+
+  <div class="grp"><span class="num">8</span> Panoul tău de control</div>
+
+  <div class="q" data-q="dashboard" data-type="ymn">
+    <div class="qt"><span>Tablou de bord cu cifrele afacerii + alerte de stoc <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">Pe românește: prima pagină din panoul tău de administrare îți arată dintr-o privire cum merge treaba — vânzările de azi și de luna asta, ce produse se vând cel mai bine, câți bani ai de încasat de la curieri din ramburs, cât valorează marfa din stoc. Și te <b>anunță singur</b> când un produs e pe terminate („mai ai 2 ecrane de iPhone 13!").</div>
+    <div class="win"><b>Cu ce te ajută:</b> știi mereu cum stai fără să faci calcule pe hârtie, și nu rămâi niciodată fără stoc exact la produsele care se vând.</div>
+    <div class="opts3" data-name="dashboard"></div>
+  </div>
+
+  <div class="q" data-q="autoproc" data-type="lvl">
+    <div class="qt"><span>Cât de automat să meargă procesarea comenzilor? <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">Când intră o comandă, cineva trebuie să o confirme, să facă eticheta de curier, factura și emailul către client. Astea se pot face <b>manual</b> (le faci tu pe fiecare), <b>semi-automat</b> (comenzile plătite cu cardul se procesează singure — banii sunt deja la tine, e sigur) sau <b>complet automat</b> (tot lanțul merge singur: confirmare → etichetă curier → factură → email cu urmărire → scade stocul; tu doar împachetezi).</div>
+    <div class="win"><b>Cu ce te ajută:</b> munca de birou dispare — la 10 comenzi pe zi înseamnă 1–2 ore câștigate zilnic, în care te ocupi de vânzare, nu de hârtii.</div>
+    <div class="lvls">
+      <label><input type="radio" name="autoproc" value="manual"><div><div class="lt">Manual</div><div class="ld">Confirm și procesez eu fiecare comandă. Control total.</div></div></label>
+      <label><input type="radio" name="autoproc" value="semi-automat (comenzile cu card merg singure)"><div><div class="lt">Semi-automat</div><div class="ld">Comenzile plătite cu cardul merg singure; la ramburs confirm eu (mai sigur).</div></div></label>
+      <label><input type="radio" name="autoproc" value="complet automat"><div><div class="lt">Complet automat</div><div class="ld">Tot lanțul merge singur, eu doar împachetez și predau coletul.</div></div></label>
+    </div>
+  </div>
+
+  <div class="grp"><span class="num">9</span> Funcții speciale</div>
+
+  <div class="q" data-q="chatbot" data-type="ymn">
+    <div class="qt"><span>Asistent automat de chat pentru clienți (chatbot) <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">O ferestruică de chat pe site în care un „vânzător automat" răspunde singur, non-stop, la întrebările clienților: „e pe stoc?", „în cât timp ajunge?", „ce ecran se potrivește la telefonul meu?".</div>
+    <div class="win"><b>Cu ce te ajută:</b> răspunde și noaptea la 11, când tu dormi — clientul nu pleacă la concurență pentru că nu i-a răspuns nimeni. Și scapi de întrebările care se tot repetă.</div>
+    <div class="opts3" data-name="chatbot"></div>
+  </div>
+
+  <div class="q" data-q="service" data-type="ymn">
+    <div class="qt"><span>Programări online la service / reparații <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">Dacă faci și reparații (schimb de ecran, baterie etc.), clientul își poate face programare direct de pe site: alege serviciul, ziua și ora — iar tu vezi programările în panoul tău.</div>
+    <div class="win"><b>Cu ce te ajută:</b> mai puține telefoane de „când pot veni?", program organizat, și site-ul îți aduce clienți și la service, nu doar la vânzare.</div>
+    <div class="opts3" data-name="service"></div>
+  </div>
+
+  <div class="grp"><span class="num">10</span> De viitor — te interesează cândva?</div>
+  <div class="grp-sub">Astea NU intră în oferta de acum. Vreau doar să știu spre ce vrei să crești, ca să construiesc magazinul pregătit pentru ele.</div>
+
+  <div class="q" data-q="v_emag" data-type="ymn">
+    <div class="qt"><span>Vânzare și pe eMAG <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">Produsele tale listate automat și pe eMAG Marketplace, cu comenzile adunate în același panou al tău.</div>
+    <div class="win"><b>Cu ce te ajută:</b> ajungi la milioanele de cumpărători de pe eMAG, pe care singur nu i-ai atinge.</div>
+    <div class="opts3" data-name="v_emag"></div>
+  </div>
+
+  <div class="q" data-q="v_comparatoare" data-type="ymn">
+    <div class="qt"><span>Listare pe site-uri de comparat prețuri <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">Produsele tale apar automat pe site-uri gen compari.ro, unde oamenii compară prețurile între magazine.</div>
+    <div class="win"><b>Cu ce te ajută:</b> clienți în plus, veniți de la cei care „vânează" cel mai bun preț.</div>
+    <div class="opts3" data-name="v_comparatoare"></div>
+  </div>
+
+  <div class="q" data-q="v_marketing" data-type="ymn">
+    <div class="qt"><span>Mesaje automate de vânzare (coș abandonat, cerere de păreri) <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">Sistemul trimite singur emailuri: „ai lăsat un telefon în coș, îl mai vrei?" sau, după livrare, „cum ți se pare produsul? lasă o părere".</div>
+    <div class="win"><b>Cu ce te ajută:</b> recuperezi vânzări pe care altfel le pierdeai (mulți uită pur și simplu de coș) și aduni păreri care conving clienții următori.</div>
+    <div class="opts3" data-name="v_marketing"></div>
+  </div>
+
+  <div class="q" data-q="v_fidelitate" data-type="ymn">
+    <div class="qt"><span>Program de fidelitate cu puncte <span class="check">✓ răspuns salvat</span></span></div>
+    <div class="expl">Clienții adună puncte la fiecare cumpărătură și le folosesc ca reducere data viitoare.</div>
+    <div class="win"><b>Cu ce te ajută:</b> clienții se întorc la tine în loc să cumpere de oriunde e mai ieftin cu 5 lei.</div>
+    <div class="opts3" data-name="v_fidelitate"></div>
+  </div>
+
+  <div class="grp"><span class="num">11</span> Spune-mi cu cuvintele tale</div>
+  <div class="grp-sub">Partea cea mai importantă — aici îmi spui liber ce ai tu în minte.</div>
+
+  <div class="q" data-field>
+    <div class="field">
+      <label>Ce ai tu în minte pentru magazinul ăsta? <small>(scrie liber — cum ți-l imaginezi, ce e important pentru tine, ce te enervează la alte site-uri, orice idee sau grijă)</small></label>
+      <textarea class="big" id="f_altceva" placeholder="Scrie aici orice — nu există idee greșită..."></textarea>
+    </div>
+    <div class="field">
+      <label>Ai un magazin/site care îți place mult și ai vrea să semene? <small>(opțional — scrie adresa)</small></label>
+      <input type="text" id="f_inspiratie" placeholder="ex: www.exemplu.ro">
+    </div>
+  </div>
+
+  <div class="finish">
+    <h3>Gata! Trimite răspunsurile</h3>
+    <p>Apasă butonul — răspunsurile ajung direct la mine, iar tu primești pe loc și un rezumat organizat cu tot ce ai ales.</p>
+    <div class="btnrow">
+      <button class="btn" id="sendBtn" onclick="submitForm()">Trimite răspunsurile către Flavius</button>
+      <button class="btn sec" id="copyBtn" style="display:none" onclick="copySummary()">📋 Copiază rezumatul</button>
+      <button class="btn sec" id="dlBtn" style="display:none" onclick="downloadSummary()">⬇ Descarcă (.txt)</button>
+      <span class="copied" id="copiedMsg">Copiat! ✓</span>
+    </div>
+    <div class="missing" id="missingMsg"></div>
+    <div id="sentOk">✅ Trimis! Am primit răspunsurile tale — te contactez în cel mai scurt timp. Mai jos ai rezumatul, pentru tine.</div>
+    <div id="sentFail">⚠ Nu s-a putut trimite automat (probabil o problemă de internet). Nicio grijă: apasă „Copiază rezumatul" și trimite-mi-l pe WhatsApp sau email.</div>
+    <div id="summaryBox"><textarea id="summaryText" readonly></textarea></div>
+  </div>
+
+  <footer>
+    Chestionar pregătit de <b style="color:var(--txt)">Flavius Vranău</b> · dezvoltare web &amp; automatizări · flavius.vranau@fargrup.ro
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var WEBHOOK_URL = 'https://flaviusvr.app.n8n.cloud/webhook/chestionar-gsm';
+
+  var labels = [
+    {v:'Sigur o vreau', c:'sel-yes'},
+    {v:'Poate', c:'sel-maybe'},
+    {v:'Nu o doresc', c:'sel-no'}
+  ];
+  document.querySelectorAll('.opts3').forEach(function(box){
+    var name = box.getAttribute('data-name');
+    labels.forEach(function(l){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = l.v;
+      b.addEventListener('click', function(){
+        box.querySelectorAll('button').forEach(function(x){ x.className=''; });
+        b.className = l.c;
+        answers[name] = l.v;
+        box.closest('.q').classList.add('answered');
+        updateProgress();
+      });
+      box.appendChild(b);
+    });
+  });
+
+  document.querySelectorAll('.q[data-type="lvl"]').forEach(function(q){
+    q.querySelectorAll('input[type=radio]').forEach(function(r){
+      r.addEventListener('change', function(){
+        q.querySelectorAll('label').forEach(function(l){ l.classList.remove('on'); });
+        r.closest('label').classList.add('on');
+        answers[r.name] = r.value;
+        q.classList.add('answered');
+        updateProgress();
+      });
+    });
+  });
+
+  window.answers = {};
+  var totalQ = document.querySelectorAll('.q[data-q]').length;
+  document.getElementById('pTotal').textContent = totalQ;
+
+  window.updateProgress = function(){
+    var done = Object.keys(answers).length;
+    document.getElementById('pDone').textContent = done;
+    document.getElementById('pBar').style.width = Math.round(done/totalQ*100) + '%';
+  };
+
+  var YMN = [
+    ['piese_compat','Căutare piese după modelul telefonului'],
+    ['secondhand','Produse second-hand / resigilate marcate'],
+    ['filtre_avansate','Filtre avansate pe specificații'],
+    ['limita','Limită de cumpărare pe client'],
+    ['easybox','Ridicare din Easybox'],
+    ['ridicare','Ridicare din magazinul fizic'],
+    ['cont','Cont de client + istoric'],
+    ['vouchere','Cupoane reducere + listă dorințe'],
+    ['recenzii','Păreri clienți + recomandări în coș'],
+    ['whatsapp','Buton „Întreabă pe WhatsApp" la produs'],
+    ['analytics','Statistici vizitatori (Google Analytics)'],
+    ['gshopping','Produse afișate în Google (Shopping)'],
+    ['dashboard','Tablou de bord + alerte stoc'],
+    ['chatbot','Asistent chat automat (chatbot)'],
+    ['service','Programări online la service'],
+    ['v_emag','[Viitor] Vânzare pe eMAG'],
+    ['v_comparatoare','[Viitor] Comparatoare de prețuri'],
+    ['v_marketing','[Viitor] Mesaje automate de vânzare'],
+    ['v_fidelitate','[Viitor] Program de fidelitate']
+  ];
+  var LVL = [
+    ['produse','Număr produse'],
+    ['incarcare','Cum intră produsele în magazin'],
+    ['termen','Termen dorit'],
+    ['plata','Metode de plată'],
+    ['facturare','Facturare'],
+    ['awb','Expediere colete (AWB)'],
+    ['seo','Optimizare Google (SEO)'],
+    ['autoproc','Procesare comenzi']
+  ];
+
+  function buildSummary(nume, firma, tel, email){
+    var d = new Date();
+    var L = [];
+    L.push('=======================================');
+    L.push('  CHESTIONAR MAGAZIN ONLINE - RASPUNSURI');
+    L.push('=======================================');
+    L.push('');
+    L.push('Nume:    ' + nume);
+    if(firma) L.push('Firma:   ' + firma);
+    L.push('Telefon: ' + tel);
+    if(email) L.push('Email:   ' + email);
+    L.push('Data:    ' + d.toLocaleDateString('ro-RO') + ' ' + d.toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit'}));
+    L.push('');
+    L.push('[ALEGERILE DE BAZA]');
+    LVL.forEach(function(m){ L.push('   - ' + m[1] + ': ' + (answers[m[0]] || '(fara raspuns)')); });
+    L.push('');
+    L.push('[NEAPARAT ISI DORESTE - a ales "Sigur o vreau"]');
+    var got = false;
+    YMN.forEach(function(m){ if(answers[m[0]] === 'Sigur o vreau'){ L.push('   [DA] ' + m[1]); got = true; } });
+    if(!got) L.push('   (nimic bifat "Sigur")');
+    L.push('');
+    L.push('[AR FI BINE DE AVUT - a ales "Poate"]');
+    got = false;
+    YMN.forEach(function(m){ if(answers[m[0]] === 'Poate'){ L.push('   [~] ' + m[1]); got = true; } });
+    if(!got) L.push('   (nimic bifat "Poate")');
+    L.push('');
+    L.push('[NU DORESTE]');
+    got = false;
+    YMN.forEach(function(m){ if(answers[m[0]] === 'Nu o doresc'){ L.push('   [NU] ' + m[1]); got = true; } });
+    if(!got) L.push('   (nimic respins)');
+    var unanswered = [];
+    YMN.concat(LVL).forEach(function(m){ if(!answers[m[0]]) unanswered.push(m[1]); });
+    if(unanswered.length){ L.push(''); L.push('[FARA RASPUNS]: ' + unanswered.join(', ')); }
+    L.push('');
+    var alt = document.getElementById('f_altceva').value.trim();
+    var insp = document.getElementById('f_inspiratie').value.trim();
+    if(alt){ L.push('[IN CUVINTELE LUI]:'); L.push('   ' + alt); L.push(''); }
+    if(insp){ L.push('Site care ii place: ' + insp); L.push(''); }
+    L.push('=======================================');
+    return L.join(String.fromCharCode(10));
+  }
+
+  window.submitForm = function(){
+    var nume = document.getElementById('f_nume').value.trim();
+    var tel = document.getElementById('f_tel').value.trim();
+    var firma = document.getElementById('f_firma').value.trim();
+    var email = document.getElementById('f_email').value.trim();
+    var missing = [];
+    if(!nume) missing.push('numele tău');
+    if(!tel) missing.push('telefonul');
+    var mm = document.getElementById('missingMsg');
+    if(missing.length){
+      mm.style.display = 'block';
+      mm.textContent = '⚠ Te rog completează: ' + missing.join(', ') + '.';
+      return;
+    }
+    mm.style.display = 'none';
+
+    var txt = buildSummary(nume, firma, tel, email);
+    document.getElementById('summaryText').value = txt;
+    document.getElementById('summaryBox').style.display = 'block';
+    document.getElementById('copyBtn').style.display = 'inline-block';
+    document.getElementById('dlBtn').style.display = 'inline-block';
+
+    var payload = { nume: nume, firma: firma, telefon: tel, email: email,
+      inspiratie: document.getElementById('f_inspiratie').value.trim(),
+      altceva: document.getElementById('f_altceva').value.trim() };
+    YMN.concat(LVL).forEach(function(m){ payload[m[0]] = answers[m[0]] || ''; });
+
+    var btn = document.getElementById('sendBtn');
+    btn.disabled = true; btn.textContent = 'Se trimite...';
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(r){
+      if(!r.ok) throw new Error('HTTP ' + r.status);
+      document.getElementById('sentOk').style.display = 'block';
+      document.getElementById('sentFail').style.display = 'none';
+      btn.textContent = 'Trimis ✓';
+    }).catch(function(){
+      document.getElementById('sentFail').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Încearcă din nou';
+    }).finally(function(){
+      document.getElementById('summaryBox').scrollIntoView({behavior:'smooth'});
+    });
+  };
+
+  window.copySummary = function(){
+    var t = document.getElementById('summaryText');
+    t.select();
+    try{ navigator.clipboard.writeText(t.value); }catch(e){ document.execCommand('copy'); }
+    var c = document.getElementById('copiedMsg');
+    c.classList.add('show');
+    setTimeout(function(){ c.classList.remove('show'); }, 2000);
+  };
+
+  window.downloadSummary = function(){
+    var txt = document.getElementById('summaryText').value;
+    var blob = new Blob([txt], {type:'text/plain;charset=utf-8'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'chestionar-magazin-online.txt';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  };
+})();
+</script>
+</body>
+  </html>
