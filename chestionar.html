@@ -114,10 +114,11 @@
     <div class="expl">Numără tot ce vinzi: telefoane, huse, folii, încărcătoare, dar și piese — ecrane, baterii, conectori, camere etc. (Fiecare culoare/memorie nu se numără separat.)</div>
     <div class="win"><b>De ce întreb:</b> de la asta pornește mărimea magazinului și felul în care organizăm catalogul.</div>
     <div class="lvls">
-      <label><input type="radio" name="produse" value="sub 100"><div><div class="lt">Sub 100 de produse</div><div class="ld">Magazin mic, ușor de administrat manual.</div></div></label>
-      <label><input type="radio" name="produse" value="100–500"><div><div class="lt">Între 100 și 500</div><div class="ld">Mărimea tipică pentru un magazin GSM local.</div></div></label>
-      <label><input type="radio" name="produse" value="500–1.000"><div><div class="lt">Între 500 și 1.000</div><div class="ld">Catalog serios — de obicei telefoane + accesorii + piese.</div></div></label>
-      <label><input type="radio" name="produse" value="peste 1.000"><div><div class="lt">Peste 1.000</div><div class="ld">Catalog mare (multe piese/modele) — organizăm încărcarea automată.</div></div></label>
+      <label><input type="radio" name="produse" value="0–500"><div><div class="lt">0 – 500 de produse</div><div class="ld">Magazin mic spre mediu, ușor de administrat.</div></div></label>
+      <label><input type="radio" name="produse" value="500–1.000"><div><div class="lt">500 – 1.000</div><div class="ld">Mărimea tipică pentru un magazin GSM cu accesorii.</div></div></label>
+      <label><input type="radio" name="produse" value="1.000–2.500"><div><div class="lt">1.000 – 2.500</div><div class="ld">Catalog serios — telefoane + accesorii + piese.</div></div></label>
+      <label><input type="radio" name="produse" value="2.500–5.000"><div><div class="lt">2.500 – 5.000</div><div class="ld">Catalog mare, cu multe piese și modele.</div></div></label>
+      <label><input type="radio" name="produse" value="5.000–10.000"><div><div class="lt">5.000 – 10.000</div><div class="ld">Catalog foarte mare — încărcarea automată devine obligatorie.</div></div></label>
     </div>
   </div>
 
@@ -129,15 +130,6 @@
       <label><input type="radio" name="incarcare" value="le adaug eu, manual"><div><div class="lt">Le adaug eu, de mână</div><div class="ld">Primești panoul și le introduci tu, în ritmul tău.</div></div></label>
       <label><input type="radio" name="incarcare" value="import inițial din lista mea (Excel)"><div><div class="lt">Am o listă (Excel) — să fie încărcate la început</div><div class="ld">Îmi dai lista ta, eu o încarc în magazin la lansare.</div></div></label>
       <label><input type="radio" name="incarcare" value="legătură automată cu furnizorul (stoc/prețuri la zi)"><div><div class="lt">Legătură automată cu furnizorul</div><div class="ld">Produsele, prețurile și stocul vin și se actualizează singure de la furnizorul tău.</div></div></label>
-    </div>
-  </div>
-
-  <div class="q" data-q="termen" data-type="lvl">
-    <div class="qt"><span>Când ai vrea să fie gata magazinul? <span class="check">✓ răspuns salvat</span></span></div>
-    <div class="lvls">
-      <label><input type="radio" name="termen" value="cât mai repede (sub 1 lună)"><div><div class="lt">Cât mai repede (sub 1 lună)</div></div></label>
-      <label><input type="radio" name="termen" value="1–2 luni"><div><div class="lt">În 1–2 luni</div></div></label>
-      <label><input type="radio" name="termen" value="nu mă grăbesc"><div><div class="lt">Nu mă grăbesc, vreau să iasă bine</div></div></label>
     </div>
   </div>
 
@@ -470,7 +462,6 @@
   var LVL = [
     ['produse','Număr produse'],
     ['incarcare','Cum intră produsele în magazin'],
-    ['termen','Termen dorit'],
     ['plata','Metode de plată'],
     ['facturare','Facturare'],
     ['awb','Expediere colete (AWB)'],
